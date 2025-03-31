@@ -12,7 +12,7 @@ const List<Color> _colorThemes = [
   Colors.cyan,
   Colors.indigo,
 ];
-
+  
 class AppTheme {
   final int selectedColor;
 
