@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:yes_no_app/domain/entities/message.dart';
 
 class YesNoModel {
@@ -17,14 +18,23 @@ class YesNoModel {
         image: json["image"],
       );
 
-  Message toMessageEntity() => Message(
-      text: answer == 'yes'
-          ? 'Sí'
-          : answer == 'no'
-              ? 'No'
-              : 'Quizás',
+  Message toMessageEntity() {
+    final random = Random();
+
+    String translatedAnswer;
+    if (answer == 'yes') {
+      translatedAnswer = random.nextBool() ? 'Sí' : 'Tal vez';
+    } else if (answer == 'no') {
+      translatedAnswer = 'No';
+    } else {
+      translatedAnswer = 'Quizás';
+    }
+
+    return Message(
+      text: translatedAnswer,
       fromWho: FromWho.hers,
       imageUrl: image,
       // imageUrl: 'https://yesno.wtf/assets/' + image,
-              );
+    );
+  }
 }

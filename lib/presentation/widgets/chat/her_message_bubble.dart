@@ -25,13 +25,13 @@ class HerMessageBubble extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 5,
+        const SizedBox(height: 5),
+        _ImageBubble(imageUrl: message.imageUrl!),
+        const SizedBox(height: 5),
+        Text(
+          '${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+          style: const TextStyle(fontSize: 10, color: Colors.grey),
         ),
-        _ImageBubble(imageUrl: message.imageUrl!,),
-        const SizedBox(
-          height: 5,
-        )
       ],
     );
   }
@@ -45,22 +45,23 @@ class _ImageBubble extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.network(
-          imageUrl,
-          width: size.width * 0.7,
-          height: 150,
-          fit: BoxFit.cover,
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) return child;
+      borderRadius: BorderRadius.circular(20),
+      child: Image.network(
+        imageUrl,
+        width: size.width * 0.7,
+        height: 150,
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
 
-            return Container(
-              width: size.width * 0.7,
-              height: 150,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: const Text('Yuno is contacting...'),
-            );
-          },
-        ));
+          return Container(
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: const Text('Yuno is contacting...'),
+          );
+        },
+      ),
+    );
   }
 }

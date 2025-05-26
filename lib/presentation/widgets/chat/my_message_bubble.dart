@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
 class MyMessageBubble extends StatelessWidget {
-  //variable de la identidad atomica Message
   final Message message;
-  //se añade la variable al constructor
   const MyMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
-
-    final colors =Theme.of(context).colorScheme;
+    final colors = Theme.of(context).colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -21,11 +18,29 @@ class MyMessageBubble extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(message.text, style: TextStyle(color: Colors.white),),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              message.text,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ),
-        const SizedBox(height: 5,)
+        const SizedBox(height: 5),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              '${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+              style: const TextStyle(fontSize: 10, color: Colors.grey),
+            ),
+            const SizedBox(width: 5),
+            Icon(
+              message.isSeen ? Icons.done_all : Icons.done,
+              size: 16,
+              color: message.isSeen ? Colors.blue : Colors.grey,
+            ),
+          ],
+        ),
       ],
     );
   }

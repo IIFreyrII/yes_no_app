@@ -17,7 +17,7 @@ class ChatProvider extends ChangeNotifier {
     final newMessage = Message(text: text, fromWho: FromWho.me);
     //Agregar un nuevo mensaje a la lista
     messageList.add(newMessage);
-    print('flutter: Cantidad de mensajes: ${messageList.length}');
+    //print('flutter: Cantidad de mensajes: ${messageList.length}');
 
     //Detectar si el usuario hizo una pregunta
     if (text.endsWith('?')) {
